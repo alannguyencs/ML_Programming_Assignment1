@@ -1,5 +1,7 @@
 import numpy as np
 from random import shuffle, randint
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import math
 

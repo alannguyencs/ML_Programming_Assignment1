@@ -22,4 +22,4 @@ def visualize(sample_x, sample_y, gt_x, gt_y, pred_y, title, img_path):
     # plt.ylabel('Books Read')
     plt.title(title)
     plt.savefig(img_path, dpi=100)
-    plt.show()
+    # plt.show()

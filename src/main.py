@@ -78,10 +78,10 @@ def deploy_lasso():
     log.write("range of lambda: " + str(_lambda) + ' : ')
 
     for candidate_id in range(1000):
-        regularized_least_square = Lasso()
-        regularized_least_square.fit(sample_phi, sample_y, _lambda)
+        lasso = Lasso()
+        lasso.fit(sample_phi, sample_y, _lambda)
 
-        pred_y = regularized_least_square.predict(gt_phi)
+        pred_y = lasso.predict(gt_phi)
 
         error = compute_mean_squared_error(pred_y, gt_y)
         candidate_error.append((error, candidate_id))
