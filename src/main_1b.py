@@ -142,7 +142,7 @@ def deploy_robust_regression():
 
 
 def bayesian_regression():
-    title = 'Bayesian Regression'
+    title = 'BAYESIAN REGRESSION'
     log = open(result_sub_path + title + '.txt', 'w')
     img_path = result_sub_path + title + '.png'
 
@@ -186,9 +186,8 @@ def bayesian_regression():
 
     visualize(sample_x, sample_y, gt_x, gt_y, pred_y, title, img_path, pred_std)
 
-#========question: how to compute standard deviation here????
 
-
+#================================================================================
 
 # deploy_least_square()
 # deploy_regularized_least_squares()
