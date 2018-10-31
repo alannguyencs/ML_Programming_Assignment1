@@ -1,0 +1,4 @@
+range of lambda: 1e-06 : 1546318920731992.0
+lambda: 1e-06
+Training MSE: 4.336372835925114e-05
+Testing MSE: 1.3668937431939367
