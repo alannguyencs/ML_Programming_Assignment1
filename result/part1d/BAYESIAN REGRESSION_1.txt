@@ -1,0 +1,4 @@
+range of alpha: 1e-05 : 1.5463189207319964e+16
+alpha: 1e-05
+Training MSE: 17.01639925893321
+Testing MSE: 50.847341971449644
