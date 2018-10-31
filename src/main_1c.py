@@ -226,19 +226,19 @@ for sample_id in range(4 * num_sub_sample):
     sample_error_list[0].append(sample_error)
     error_list[0].append(error)
 
-    sample_error, error = deploy_regularized_least_squares()
+    sample_error, error = deploy_regularized_least_squares(sample_id)
     sample_error_list[1].append(sample_error)
     error_list[1].append(error)
 
-    sample_error, error = deploy_lasso()
+    sample_error, error = deploy_lasso(sample_id)
     sample_error_list[2].append(sample_error)
     error_list[2].append(error)
 
-    sample_error, error = deploy_robust_regression()
+    sample_error, error = deploy_robust_regression(sample_id)
     sample_error_list[3].append(sample_error)
     error_list[3].append(error)
 
-    sample_error, error = bayesian_regression()
+    sample_error, error = bayesian_regression(sample_id)
     sample_error_list[4].append(sample_error)
     error_list[4].append(error)
 
