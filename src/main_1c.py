@@ -222,6 +222,7 @@ summary_file = open(result_sub_path + 'summary.txt', 'w')
 sample_error_list = [[] for _ in range(5)]
 error_list = [[] for _ in range(5)]
 for sample_id in range(4 * num_sub_sample):
+    print ("sample_id:", sample_id)
     sample_error, error = deploy_least_square(sample_id)
     sample_error_list[0].append(sample_error)
     error_list[0].append(error)
@@ -242,7 +243,7 @@ for sample_id in range(4 * num_sub_sample):
     sample_error_list[4].append(sample_error)
     error_list[4].append(error)
 
-for i in range(1):
+for i in range(5):
     for j in range(4):
         s1 = sum(sample_error_list[i][(j*num_sub_sample):((j+1)*num_sub_sample)])
         s1 /= num_sub_sample
