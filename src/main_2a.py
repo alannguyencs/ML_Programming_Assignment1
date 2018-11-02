@@ -36,6 +36,12 @@ def deploy_least_square():
     log.write("Training MSE: " + str(sample_error) + '\n')
     log.write("Testing MSE: " + str(error) + '\n')
 
+    sample_error = compute_mean_absolute_error(pred_sample_y, sample_y)
+    error = compute_mean_absolute_error(pred_y, gt_y)
+
+    log.write("Training MAE: " + str(sample_error) + '\n')
+    log.write("Testing MAE: " + str(error) + '\n')
+
     visualize_people_counting(gt_y, pred_y, title, img_path)
 
 def deploy_regularized_least_squares():
@@ -77,49 +83,61 @@ def deploy_regularized_least_squares():
     log.write("Training MSE: " + str(sample_error) + '\n')
     log.write("Testing MSE: " + str(error) + '\n')
 
+    sample_error = compute_mean_absolute_error(pred_sample_y, sample_y)
+    error = compute_mean_absolute_error(pred_y, gt_y)
+
+    log.write("Training MAE: " + str(sample_error) + '\n')
+    log.write("Testing MAE: " + str(error) + '\n')
+
     visualize_people_counting(gt_y, pred_y, title, img_path)
-#
-# def deploy_lasso():
-#     title = 'LASSO'
-#     log = open(result_sub_path + title + '.txt', 'w')
-#     img_path = result_sub_path + title + '.png'
-#
-#     candidate_pred_y, candidate_error, candidate_sample_error, candidate_lambda = [], [], [], []
-#     _lambda = 0.000001
-#     _lambda_step = 1.05
-#     log.write("range of lambda: " + str(_lambda) + ' : ')
-#
-#     for candidate_id in range(1000):
-#         model = Lasso()
-#         model.fit(sample_phi, sample_y, _lambda)
-#
-#         pred_sample_y = model.predict(sample_phi)
-#         pred_y = model.predict(gt_phi)
-#
-#         sample_error = compute_mean_squared_error(pred_sample_y, sample_y)
-#         error = compute_mean_squared_error(pred_y, gt_y)
-#
-#         candidate_sample_error.append((sample_error, candidate_id))
-#         candidate_error.append(error)
-#         candidate_lambda.append(_lambda)
-#         candidate_pred_y.append(pred_y)
-#
-#         _lambda *= _lambda_step
-#
-#     log.write(str(_lambda) + '\n')
-#     candidate_error.sort()
-#
-#     (sample_error, best_id) = candidate_sample_error[0]
-#     error = candidate_error[best_id]
-#     pred_y = candidate_pred_y[best_id]
-#     _lambda = candidate_lambda[best_id]
-#
-#     log.write("lambda: " + str(_lambda) + '\n')
-#     log.write("Training MSE: " + str(sample_error) + '\n')
-#     log.write("Testing MSE: " + str(error) + '\n')
-#
-#
-#     visualize_people_counting(gt_y, pred_y, title, img_path)
+
+def deploy_lasso():
+    title = 'LASSO'
+    log = open(result_sub_path + title + '.txt', 'w')
+    img_path = result_sub_path + title + '.png'
+
+    candidate_pred_y, candidate_error, candidate_sample_error, candidate_lambda = [], [], [], []
+    _lambda = 0.000001
+    _lambda_step = 1.05
+    log.write("range of lambda: " + str(_lambda) + ' : ')
+
+    for candidate_id in range(1000):
+        model = Lasso()
+        model.fit(sample_phi, sample_y, _lambda)
+
+        pred_sample_y = model.predict(sample_phi)
+        pred_y = model.predict(gt_phi)
+
+        sample_error = compute_mean_squared_error(pred_sample_y, sample_y)
+        error = compute_mean_squared_error(pred_y, gt_y)
+
+        candidate_sample_error.append((sample_error, candidate_id))
+        candidate_error.append(error)
+        candidate_lambda.append(_lambda)
+        candidate_pred_y.append(pred_y)
+
+        _lambda *= _lambda_step
+
+    log.write(str(_lambda) + '\n')
+    candidate_error.sort()
+
+    (sample_error, best_id) = candidate_sample_error[0]
+    error = candidate_error[best_id]
+    pred_y = candidate_pred_y[best_id]
+    _lambda = candidate_lambda[best_id]
+
+    log.write("lambda: " + str(_lambda) + '\n')
+    log.write("Training MSE: " + str(sample_error) + '\n')
+    log.write("Testing MSE: " + str(error) + '\n')
+
+    sample_error = compute_mean_absolute_error(pred_sample_y, sample_y)
+    error = compute_mean_absolute_error(pred_y, gt_y)
+
+    log.write("Training MAE: " + str(sample_error) + '\n')
+    log.write("Testing MAE: " + str(error) + '\n')
+
+
+    visualize_people_counting(gt_y, pred_y, title, img_path)
 #
 def deploy_robust_regression():
     title = 'ROBUST REGRESSION'
@@ -138,6 +156,11 @@ def deploy_robust_regression():
     log.write("Training MSE: " + str(sample_error) + '\n')
     log.write("Testing MSE: " + str(error) + '\n')
 
+    sample_error = compute_mean_absolute_error(pred_sample_y, sample_y)
+    error = compute_mean_absolute_error(pred_y, gt_y)
+
+    log.write("Training MAE: " + str(sample_error) + '\n')
+    log.write("Testing MAE: " + str(error) + '\n')
 
     visualize_people_counting(gt_y, pred_y, title, img_path)
 
@@ -183,6 +206,12 @@ def bayesian_regression():
     log.write("alpha: " + str(_alpha) + '\n')
     log.write("Training MSE: " + str(sample_error) + '\n')
     log.write("Testing MSE: " + str(error) + '\n')
+
+    sample_error = compute_mean_absolute_error(pred_sample_y, sample_y)
+    error = compute_mean_absolute_error(pred_y, gt_y)
+
+    log.write("Training MAE: " + str(sample_error) + '\n')
+    log.write("Testing MAE: " + str(error) + '\n')
 
 
     visualize_people_counting(gt_y, pred_y, title, img_path)
