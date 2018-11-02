@@ -15,7 +15,7 @@ sample_phi = generate_polynomial_features(sample_x, polynomial_degree=10)
 
 gt_data = DataSet(gt_x_path, gt_y_path)
 gt_x, gt_y = gt_data.x, gt_data.y
-gt_phi = generate_polynomial_features(gt_x)
+gt_phi = generate_polynomial_features(gt_x, polynomial_degree=10)
 
 def deploy_least_square():
     title = 'LEAST SQUARES'
