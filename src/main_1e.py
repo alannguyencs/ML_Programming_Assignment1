@@ -189,8 +189,8 @@ def bayesian_regression():
 
 #================================================================================
 
-# deploy_least_square()
-# deploy_regularized_least_squares()
+deploy_least_square()
+deploy_regularized_least_squares()
 deploy_lasso()
-# deploy_robust_regression()
-# bayesian_regression()
+deploy_robust_regression()
+bayesian_regression()
