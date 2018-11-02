@@ -7,11 +7,11 @@ from bayesian_regression import BayesianRegression
 from dataset import DataSet
 from common import *
 
-result_sub_path = result_path + 'part1b/'
+result_sub_path = result_path + 'part1e/'
 #get data
 sample_data = DataSet(sample_x_path, sample_y_path)
 sample_x, sample_y = sample_data.x, sample_data.y
-sample_phi = generate_polynomial_features(sample_x, polynomial_degree=10)
+sample_phi = generate_polynomial_features(sample_x)
 
 gt_data = DataSet(gt_x_path, gt_y_path)
 gt_x, gt_y = gt_data.x, gt_data.y
@@ -189,8 +189,8 @@ def bayesian_regression():
 
 #================================================================================
 
-deploy_least_square()
-deploy_regularized_least_squares()
+# deploy_least_square()
+# deploy_regularized_least_squares()
 deploy_lasso()
-deploy_robust_regression()
-bayesian_regression()
+# deploy_robust_regression()
+# bayesian_regression()
