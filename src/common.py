@@ -44,7 +44,7 @@ def visualize_people_counting(gt_y, pred_y, title, img_path):
     # if std is not None:
     #     plt.errorbar(gt_x, pred_y, yerr=std, color = '#297083', ls = 'none', lw = 2, capthick = 2)
 
-    plt.legend(loc='upper right', shadow=True, fontsize='x-large')
+    # plt.legend(loc='upper right', shadow=True, fontsize='x-large')
     # plt.xlabel('Months')
     # plt.ylabel('Books Read')
     plt.title(title)
