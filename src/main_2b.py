@@ -1,7 +1,7 @@
 from params import *
 from least_squares import LeastSquares
 from regularized_least_squares import RegularizedLeastSquares
-from lasso import Lasso
+# from lasso import Lasso
 from robust_regression import RobustRegression
 from bayesian_regression import BayesianRegression
 from dataset import DataSet
@@ -11,13 +11,14 @@ result_sub_path = result_path + 'part2a/'
 #get data
 sample_data = DataSet(cnt_sample_x_path, cnt_sample_y_path)
 sample_x, sample_y = sample_data.x, sample_data.y
-sample_phi = generate_polynomial_features(sample_x, polynomial_degree=10)
-
+sample_phi = generate_counting_features(sample_x)
+# print (np.amax(sample_phi), np.amin(sample_phi))
 print (sample_x.shape, sample_y.shape, sample_phi.shape)
 
 gt_data = DataSet(cnt_gt_x_path, cnt_gt_y_path)
 gt_x, gt_y = gt_data.x, gt_data.y
-gt_phi = gt_x
+gt_phi = generate_counting_features(gt_x)
+# print (np.amax(gt_phi), np.amin(gt_phi))
 
 def deploy_least_square():
     title = 'LEAST SQUARES'
@@ -221,6 +222,6 @@ def bayesian_regression():
 #
 deploy_least_square()
 deploy_regularized_least_squares()
-deploy_lasso()
+# deploy_lasso()
 deploy_robust_regression()
 bayesian_regression()

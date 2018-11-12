@@ -8,6 +8,29 @@ def generate_polynomial_features(x, polynomial_degree=5):
         phi = np.append(phi, [x ** k], axis=0)
     return phi
 
+def generate_counting_features(x):
+    x = x.T
+    (num_samples, dimension) = x.shape
+    #initialize with bias features
+    phi = [[1.0] for _ in range(num_samples)]
+
+    #append normalized features
+    for i in range(num_samples):
+        for j in range(dimension):
+            phi[i].append((x[i][j] - min_counting_feature) / range_counting_feature)
+
+    #append 2nd order polinomial features
+    for i in range(num_samples):
+        for j in range(1, dimension + 1):
+            for k in range(j, dimension + 1):
+                phi[i].append(phi[i][j] * phi[i][k])
+
+    phi = np.array(phi).T
+    # print (phi.shape)
+    # print (x.shape)
+
+    return phi
+
 def compute_mean_squared_error(pred_y, gt_y):
     N = pred_y.shape[0]
     return math.sqrt(sum([(pred_y[i] - gt_y[i]) ** 2 for i in range(N)])/N)

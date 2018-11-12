@@ -20,3 +20,7 @@ cnt_sample_y_path = '../data/count_data_trainy.txt'
 
 cnt_gt_x_path = '../data/count_data_testx.txt'
 cnt_gt_y_path = '../data/count_data_testy.txt'
+
+max_counting_feature = 3.5
+min_counting_feature = -2.5
+range_counting_feature = max_counting_feature - min_counting_feature
