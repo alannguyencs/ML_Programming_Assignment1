@@ -9,6 +9,9 @@ def generate_polynomial_features(x, polynomial_degree=5):
     return phi
 
 def generate_counting_features(x):
+    # for i in range(9):
+    #     print (np.amax(x[i]), np.amin(x[i]))
+
     x = x.T
     (num_samples, dimension) = x.shape
     #initialize with bias features
@@ -17,13 +20,15 @@ def generate_counting_features(x):
     #append normalized features
     for i in range(num_samples):
         for j in range(dimension):
-            phi[i].append((x[i][j] - min_counting_feature) / range_counting_feature)
+            phi[i].append((x[i][j] - min_counting_feature[j]) / range_counting_feature[j])
 
     #append 2nd order polinomial features
     for i in range(num_samples):
         for j in range(1, dimension + 1):
-            for k in range(j, dimension + 1):
-                phi[i].append(phi[i][j] * phi[i][k])
+            phi[i].append(phi[i][j] * phi[i][j])
+            for k in range(j+1, dimension + 1):
+                # print (j, k, phi[i][j] , phi[i][k])
+                phi[i].append(math.sqrt(phi[i][j] * phi[i][k]))
 
     phi = np.array(phi).T
     # print (phi.shape)
