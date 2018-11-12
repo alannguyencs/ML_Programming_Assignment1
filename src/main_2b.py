@@ -7,7 +7,7 @@ from bayesian_regression import BayesianRegression
 from dataset import DataSet
 from common import *
 
-result_sub_path = result_path + 'part2a/'
+result_sub_path = result_path + 'part2b/'
 #get data
 sample_data = DataSet(cnt_sample_x_path, cnt_sample_y_path)
 sample_x, sample_y = sample_data.x, sample_data.y
