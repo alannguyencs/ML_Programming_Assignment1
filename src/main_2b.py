@@ -1,7 +1,7 @@
 from params import *
 from least_squares import LeastSquares
 from regularized_least_squares import RegularizedLeastSquares
-# from lasso import Lasso
+from lasso import Lasso
 from robust_regression import RobustRegression
 from bayesian_regression import BayesianRegression
 from dataset import DataSet
@@ -22,8 +22,8 @@ gt_phi = generate_counting_features(gt_x)
 
 def deploy_least_square():
     title = 'LEAST SQUARES'
-    log = open(result_sub_path + title + '.txt', 'w')
-    img_path = result_sub_path + title + '.png'
+    log = open(result_sub_path + title + '_2.txt', 'w')
+    img_path = result_sub_path + title + '_2.png'
 
     model = LeastSquares()
     model.fit(sample_phi, sample_y)
@@ -47,15 +47,15 @@ def deploy_least_square():
 
 def deploy_regularized_least_squares():
     title = 'REGULARIZED LEAST SQUARES'
-    log = open(result_sub_path + title + '.txt', 'w')
-    img_path = result_sub_path + title + '.png'
+    log = open(result_sub_path + title + '_2.txt', 'w')
+    img_path = result_sub_path + title + '_2.png'
 
     candidate_pred_y, candidate_error, candidate_sample_error, candidate_lambda = [],[],[], []
-    _lambda = 0.000001
-    _lambda_step = 1.05
+    _lambda = 0.1
+    _lambda_step = 1.28
     log.write("range of lambda: " + str(_lambda) + ' : ')
 
-    for candidate_id in range(1000):
+    for candidate_id in range(10):
         model = RegularizedLeastSquares()
         model.fit(sample_phi, sample_y, _lambda)
 
@@ -66,7 +66,7 @@ def deploy_regularized_least_squares():
         error = compute_mean_squared_error(pred_y, gt_y)
 
         candidate_sample_error.append((sample_error, candidate_id))
-        candidate_error.append(error)
+        candidate_error.append((error, candidate_id))
         candidate_lambda.append(_lambda)
         candidate_pred_y.append(pred_y)
 
@@ -75,12 +75,15 @@ def deploy_regularized_least_squares():
     log.write(str(_lambda) + '\n')
     candidate_error.sort()
 
-    (sample_error, best_id) = candidate_sample_error[0]
-    error = candidate_error[best_id]
+    (error, best_id) = candidate_error[0]
+    # error = candidate_error[best_id]
     pred_y = candidate_pred_y[best_id]
-    _lambda = candidate_lambda[best_id]
+    good_lambda = candidate_lambda[best_id]
+    print (candidate_lambda)
+    print (best_id)
+    print (candidate_sample_error)
 
-    log.write("lambda: " + str(_lambda) + '\n')
+    log.write("lambda: " + str(good_lambda) + '\n')
     log.write("Training MSE: " + str(sample_error) + '\n')
     log.write("Testing MSE: " + str(error) + '\n')
 
@@ -94,15 +97,15 @@ def deploy_regularized_least_squares():
 
 def deploy_lasso():
     title = 'LASSO'
-    log = open(result_sub_path + title + '.txt', 'w')
-    img_path = result_sub_path + title + '.png'
+    log = open(result_sub_path + title + '_2.txt', 'w')
+    img_path = result_sub_path + title + '_2.png'
 
     candidate_pred_y, candidate_error, candidate_sample_error, candidate_lambda = [], [], [], []
-    _lambda = 0.000001
+    _lambda = 1.0
     _lambda_step = 1.05
     log.write("range of lambda: " + str(_lambda) + ' : ')
 
-    for candidate_id in range(1000):
+    for candidate_id in range(10):
         model = Lasso()
         model.fit(sample_phi, sample_y, _lambda)
 
@@ -142,8 +145,8 @@ def deploy_lasso():
 #
 def deploy_robust_regression():
     title = 'ROBUST REGRESSION'
-    log = open(result_sub_path + title + '.txt', 'w')
-    img_path = result_sub_path + title + '.png'
+    log = open(result_sub_path + title + '_2.txt', 'w')
+    img_path = result_sub_path + title + '_2.png'
 
     model = RobustRegression()
     model.fit(sample_phi, sample_y)
@@ -168,16 +171,16 @@ def deploy_robust_regression():
 
 def bayesian_regression():
     title = 'BAYESIAN REGRESSION'
-    log = open(result_sub_path + title + '.txt', 'w')
-    img_path = result_sub_path + title + '.png'
+    log = open(result_sub_path + title + '_2.txt', 'w')
+    img_path = result_sub_path + title + '_2.png'
 
     candidate_pred_y, candidate_pred_std, candidate_error, \
                     candidate_sample_error, candidate_alpha = [],[],[], [], []
-    _alpha = 0.00001
+    _alpha = 0.01
     _alpha_step = 1.05
     log.write("range of alpha: " + str(_alpha) + ' : ')
 
-    for candidate_id in range(1000):
+    for candidate_id in range(10):
         model = BayesianRegression()
         model.fit(sample_phi, sample_y, _alpha)
 
@@ -222,6 +225,6 @@ def bayesian_regression():
 #
 deploy_least_square()
 deploy_regularized_least_squares()
-# deploy_lasso()
+deploy_lasso()
 deploy_robust_regression()
 bayesian_regression()

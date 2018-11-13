@@ -1,0 +1,3 @@
+Lambda: 500
+Training MSE: 17.85875847399821
+Testing MSE: 5.7390334141063

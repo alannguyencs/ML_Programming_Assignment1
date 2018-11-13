@@ -15,20 +15,32 @@ def generate_counting_features(x):
     x = x.T
     (num_samples, dimension) = x.shape
     #initialize with bias features
-    phi = [[1.0] for _ in range(num_samples)]
+    phi = [[] for _ in range(num_samples)]
 
     #append normalized features
     for i in range(num_samples):
         for j in range(dimension):
-            phi[i].append((x[i][j] - min_counting_feature[j]) / range_counting_feature[j])
+            # phi[i].append(x[i][j])
+            r = range_counting_feature[j] / 2
+            phi[i].append((x[i][j] - min_counting_feature[j] - r) / r)
 
-    #append 2nd order polinomial features
+    # append 2nd order polinomial features
     for i in range(num_samples):
         for j in range(1, dimension + 1):
-            phi[i].append(phi[i][j] * phi[i][j])
-            for k in range(j+1, dimension + 1):
+            phi[i].append(phi[i][j] ** 2)
+            t = math.sqrt(abs(phi[i][j]))
+            if phi[i][j] < 0:
+                phi[i].append(-t)
+            else:
+                phi[i].append(t)
+    #         for k in range(j+1, dimension + 1):
+    #             t = phi[i][j] * phi[i][k]
+    #             if t >= 0:
+    #                 phi[i].append(math.sqrt(t))
+    #             else:
+    #                 phi[i].append(-math.sqrt(-t))
                 # print (j, k, phi[i][j] , phi[i][k])
-                phi[i].append(math.sqrt(phi[i][j] * phi[i][k]))
+                # phi[i].append((phi[i][j] * phi[i][k]))
 
     phi = np.array(phi).T
     # print (phi.shape)
